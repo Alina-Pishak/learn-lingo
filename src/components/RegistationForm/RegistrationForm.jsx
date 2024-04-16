@@ -10,8 +10,12 @@ import {
   RegistrationText,
   RegistrationTitle,
 } from "./RegistrationForm.styled";
-
 const validationSchema = yup.object({
+  name: yup
+    .string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
   email: yup
     .string("Enter your email")
     .email("Enter a valid email")
@@ -33,13 +37,15 @@ const RegistrationForm = ({ onClose }) => {
         <CloseRegistrationModal type="button" onClick={() => onClose()}>
           x
         </CloseRegistrationModal>
-        <RegistrationTitle>Log In</RegistrationTitle>
+        <RegistrationTitle>Registration</RegistrationTitle>
         <RegistrationText>
-          Welcome back! Please enter your credentials to access your account and
-          continue your search for an teacher.
+          Thank you for your interest in our platform! In order to register, we
+          need some information. Please provide us with the following
+          information
         </RegistrationText>
         <Formik
           initialValues={{
+            name: "",
             email: "",
             password: "",
           }}
@@ -48,6 +54,8 @@ const RegistrationForm = ({ onClose }) => {
         >
           {({ errors, touched }) => (
             <Form>
+              <RegistrationField name="name" type="text" placeholder="Name" />
+              {errors.name && touched.name ? <div>{errors.name}</div> : null}
               <RegistrationField
                 name="email"
                 type="email"
@@ -62,7 +70,7 @@ const RegistrationForm = ({ onClose }) => {
               {errors.password && touched.password ? (
                 <div>{errors.password}</div>
               ) : null}
-              <RegistrationBtn type="submit">Log In</RegistrationBtn>
+              <RegistrationBtn type="submit">Sign Up</RegistrationBtn>
             </Form>
           )}
         </Formik>
@@ -72,3 +80,42 @@ const RegistrationForm = ({ onClose }) => {
 };
 
 export default RegistrationForm;
+
+// const formik = useFormik({
+//   initialValues: {
+//     name: "",
+//     email: "",
+//     password: "",
+//   },
+//   onSubmit: (values) => {
+//     alert(JSON.stringify(values, null, 2));
+//   },
+// });
+// <form onSubmit={formik.handleSubmit}>
+{
+  /* <label htmlFor="name">Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          // onChange={formik.handleChange}
+          // value={formik.values.email}
+        />
+        <label htmlFor="email">Email Address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          // onChange={formik.handleChange}
+          // value={formik.values.email}
+        />
+        <label htmlFor="password">Email Address</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          // onChange={formik.handleChange}
+          // value={formik.values.email}
+        />
+      </form> */
+}

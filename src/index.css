@@ -1,5 +1,10 @@
 @import-normalize;
 
+*{
+    /* box-sizing: border-box; */
+    /* overflow: hidden; */
+}
+
 p,
 h1,
 h2,
@@ -43,9 +48,17 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-.container{
+.hero-container{
     padding-right: 64px;
     padding-left: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1440px;
+}
+
+.teachers-container{
+    padding-right: 128px;
+    padding-left: 128px;
     margin-left: auto;
     margin-right: auto;
     width: 1440px;

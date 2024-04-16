@@ -6,13 +6,13 @@ import {
   HeroText,
   HeroTitle,
   HeroWrapper,
-} from "./Home.styled";
+} from "./Hero.styled";
 import img1x from "../../images/girl-with-mac-1x.jpg";
 // import img2x from "../../images/girl-with-mac-2x.jpg";
 
-const Home = () => {
+const Hero = () => {
   return (
-    <HeroContainer className="container">
+    <HeroContainer className="hero-container">
       <HeroWrapper>
         <HeroTitle>
           Unlock your potential with the best{" "}
@@ -38,4 +38,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Hero;

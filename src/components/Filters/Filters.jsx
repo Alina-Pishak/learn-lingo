@@ -20,7 +20,7 @@ const priceOptions = [
 
 const Filters = () => {
   return (
-    <FiltersList>
+    <FiltersList className="teachers-container">
       <li>
         <FiltersLabel htmlFor="languages" />
         <Select

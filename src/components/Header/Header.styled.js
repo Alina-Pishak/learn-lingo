@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -17,7 +18,7 @@ export const NavContainer = styled.nav`
   gap: 8px;
 `;
 
-export const LogoLink = styled.a`
+export const LogoLink = styled(NavLink)`
   font-weight: 700;
   font-size: 20px;
   line-height: 1.2;
@@ -34,7 +35,7 @@ export const NavList = styled.ul`
 
 export const NavItem = styled.li``;
 
-export const NavItemLink = styled.a`
+export const NavItemLink = styled(NavLink)`
   /* font-weight: 400; */
   font-size: 16px;
   line-height: 1.25;

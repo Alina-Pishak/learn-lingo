@@ -1,15 +1,14 @@
-import Filters from "./components/Filters/Filters";
-import TeacherList from "./components/TeacherList/TeacherList";
-// import Header from "./components/Header/Header";
-// import Home from "./components/Home/Home";
-// import Statistics from "./components/Statistics/Statistics";
+import { lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const TeachersPage = lazy(() => import("./pages/TeachersPage/TeachersPage"));
 
 export const App = () => {
   return (
-    <div className="container" style={{ background: "#EEEEEE" }}>
-      <Filters />
-      <TeacherList />
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/teachers" element={<TeachersPage />} />
+    </Routes>
   );
 };
 

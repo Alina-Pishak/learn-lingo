@@ -7,7 +7,7 @@ import {
 
 const Statistics = () => {
   return (
-    <StatisticsList className="container">
+    <StatisticsList className="hero-container">
       <StatisticsItem>
         <StatisticsNumber>32,000+</StatisticsNumber>
         <StatisticsText>Experienced tutors</StatisticsText>

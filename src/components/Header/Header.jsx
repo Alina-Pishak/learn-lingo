@@ -12,21 +12,23 @@ import {
 } from "./Header.styled";
 
 import sprite from "../../images/symbol-defs.svg";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
-    <HeaderContainer className="container">
+    <HeaderContainer className="hero-container">
       <NavContainer>
         <svg width={28} height={28}>
           <use href={`${sprite}#icon-ukraine`}></use>
         </svg>
-        <LogoLink href="/">LearnLingo</LogoLink>
+        <LogoLink to="/">LearnLingo</LogoLink>
         <NavList>
           <NavItem>
-            <NavItemLink href="">Home</NavItemLink>
+            <NavItemLink href="/">Home</NavItemLink>
           </NavItem>
           <NavItem>
-            <NavItemLink href="">Teachers</NavItemLink>
+            <NavItemLink to="/teachers">Teachers</NavItemLink>
           </NavItem>
         </NavList>
       </NavContainer>
@@ -37,7 +39,9 @@ const Header = () => {
           </svg>
           <LoginButton>Log in</LoginButton>
         </LoginBtnWrapper>
-        <RegistrationButton>Registration</RegistrationButton>
+        <RegistrationButton onClick={() => navigate("/teachers")}>
+          Registration
+        </RegistrationButton>
       </BtnContainer>
     </HeaderContainer>
   );

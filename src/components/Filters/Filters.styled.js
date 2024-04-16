@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const FiltersList = styled.ul`
-  padding-top: 20px;
+  padding-top: 96px;
   display: flex;
   gap: 20px;
+  margin-bottom: 32px;
 `;
 
 export const FilterItem = styled.li``;
