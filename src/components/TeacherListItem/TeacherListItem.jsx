@@ -20,7 +20,7 @@ import {
 const TeacherListItem = ({ teachers }) => {
   console.log(teachers);
   return teachers.map((teacher) => (
-    <TeacherCard key={teacher.id}>
+    <TeacherCard key={teacher.avatar_url}>
       <TeacherImgWrapper>
         <TeacherImg
           src={teacher.avatar_url}

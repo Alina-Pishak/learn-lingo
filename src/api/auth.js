@@ -1,11 +1,11 @@
 import axios from "axios";
-
-const API_KEY = "";
+const API_KEY = import.meta.env.VITE_API_KEY_FIREBASE;
+console.log(API_KEY);
 
 axios.defaults.baseURL = `https://identitytoolkit.googleapis.com/v1`;
 
-export const createUser = (data) => {
-  const dat = axios.post(`/accounts:signUp?key=${API_KEY}`, {
+export const createUser = async (data) => {
+  const dat = await axios.post(`/accounts:signUp?key=${API_KEY}`, {
     ...data,
   });
   return dat;
@@ -25,7 +25,7 @@ export const getUser = (data) => {
   return dat;
 };
 
-export const logoutUser = (data) => {
-  const dat = axios.post("", { ...data });
-  return dat;
-};
+// export const logoutUser = (data) => {
+//   const dat = axios.post("", { ...data });
+//   return dat;
+// };

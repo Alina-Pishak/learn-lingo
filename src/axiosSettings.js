@@ -1,11 +1,13 @@
 import axios from "axios";
 
 export const axiosBaseQuery =
-  ({ baseUrl } = { baseUrl: "" }) =>
+  () =>
   async ({ url, method, data, params, headers }) => {
     try {
       const result = await axios({
-        url: baseUrl + url,
+        url:
+          "https://learn-lingo-9371f-default-rtdb.europe-west1.firebasedatabase.app/" +
+          url,
         method,
         data,
         params,
@@ -22,6 +24,3 @@ export const axiosBaseQuery =
       };
     }
   };
-
-axios.defaults.baseURL =
-  "https://learn-lingo-9371f-default-rtdb.europe-west1.firebasedatabase.app";

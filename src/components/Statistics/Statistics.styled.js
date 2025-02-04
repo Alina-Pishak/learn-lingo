@@ -1,18 +1,27 @@
 import styled from "styled-components";
 
-export const StatisticsList = styled.ul`
+export const StatisticsContainer = styled.div`
   border: 1.5px dashed #9fbaae;
   border-radius: 30px;
   width: 1312px;
-  height: 117px;
+  margin: 0 auto;
+`;
+
+export const StatisticsList = styled.ul`
+  /* width: 1312px; */
+  /* height: 117px; */
+  padding: 40px 122px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  gap: 100px;
+
+  /* justify-content: space-around; */
   /* box-sizing: border-box; */
 `;
 
 export const StatisticsItem = styled.li`
   display: flex;
+  align-items: center;
   gap: 16px;
 `;
 

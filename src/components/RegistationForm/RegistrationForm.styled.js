@@ -3,11 +3,14 @@ import styled from "styled-components";
 
 export const RegistrationBackdrop = styled.div`
   position: fixed;
+  display: flex;
+  justify-content: center;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(46, 47, 66, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
   transition: opacity var(--transition-dur-and-func),
     visiblity var(--transition-dur-and-func);
   overflow: hidden;
@@ -16,13 +19,12 @@ export const RegistrationBackdrop = styled.div`
 export const RegistrationModal = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
   top: 20%;
-  left: 20%;
+  left: auto;
+  right: auto;
   position: absolute;
   width: 566px;
-  height: 600px;
+  /* height: 600px; */
   padding: 64px;
   border-radius: 30px;
   background-color: #fff;
@@ -55,12 +57,17 @@ export const RegistrationText = styled.p`
 export const Form = styled(RegistrationForm)``;
 
 export const RegistrationField = styled(Field)`
-  border: 1px solid rgba(18, 20, 23, 0.1);
+  border: ${({ iserror }) =>
+    iserror === "true"
+      ? "1px solid rgb(255 42 42)"
+      : "1px solid rgba(18, 20, 23, 0.1)"};
+  /* border: 1px solid rgba(18, 20, 23, 0.1); */
   border-radius: 12px;
   padding: 16px 18px;
-  width: 438px;
+  width: 100%;
   height: 54px;
-  margin-bottom: 18px;
+  /* margin-bottom: 18px; */
+  margin-bottom: 25px;
 `;
 
 export const RegistrationBtn = styled.button`
@@ -71,6 +78,18 @@ export const RegistrationBtn = styled.button`
   font-size: 18px;
   line-height: 1.56;
   color: #121417;
-  background: #f4c550;
+  background: var(--bg-btn);
   margin-top: 22px;
+`;
+
+export const RegistrationFieldError = styled.span`
+  font-size: 12px;
+  line-height: 1.37;
+  color: rgb(255 42 42);
+  position: absolute;
+  top: 40px;
+  left: 5px;
+`;
+export const RegistrationFieldBox = styled.span`
+  position: relative;
 `;

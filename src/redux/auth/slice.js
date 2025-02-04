@@ -6,9 +6,9 @@ import {
   loginUserThunk,
   logoutUserThunk,
 } from "./thunks";
-import { handleFulfilledAuthUser } from "./helpers";
+import { handleFulfilledAuthUser, handleFulfilledLogoutUser } from "./helpers";
 
-export const slice = createSlice({
+export const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: (builder) =>
@@ -16,5 +16,5 @@ export const slice = createSlice({
       .addCase(createUserThunk.fulfilled, handleFulfilledAuthUser)
       .addCase(loginUserThunk.fulfilled, handleFulfilledAuthUser)
       .addCase(getUserThunk.fulfilled, handleFulfilledAuthUser)
-      .addCase(logoutUserThunk.fulfilled),
+      .addCase(logoutUserThunk.fulfilled, handleFulfilledLogoutUser),
 });

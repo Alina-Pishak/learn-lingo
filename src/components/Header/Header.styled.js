@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-export const HeaderContainer = styled.header`
+export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1184px;
+  /* width: 1184px; */
   padding-top: 20px;
-  padding-right: 128px;
-  padding-left: 128px;
+  padding-right: 64px;
+  padding-left: 64px;
   margin-bottom: 20px;
 `;
 
@@ -24,7 +24,7 @@ export const LogoLink = styled(NavLink)`
   line-height: 1.2;
   letter-spacing: -0.02em;
   color: #121417;
-  margin-right: 382px;
+  margin-right: 300px;
 `;
 
 export const NavList = styled.ul`
@@ -37,6 +37,9 @@ export const NavItem = styled.li``;
 
 export const NavItemLink = styled(NavLink)`
   /* font-weight: 400; */
+  border-bottom: ${({ current }) =>
+    current === "true" ? "1px solid rgb(159, 186, 174)" : "none"};
+  padding-bottom: ${({ current }) => (current === "true" ? "5px" : "none")};
   font-size: 16px;
   line-height: 1.25;
   color: #121417;

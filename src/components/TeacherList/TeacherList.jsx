@@ -3,6 +3,7 @@ import TeacherListItem from "../TeacherListItem/TeacherListItem";
 
 const TeacherList = () => {
   const { data: teachers } = useGetTeachersQuery();
+  console.log(teachers);
   return (
     teachers?.length > 0 && (
       <div>

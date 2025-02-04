@@ -1,3 +1,6 @@
 export const initialState = {
-  user: {},
+  user: "",
+  token: "",
+  isLoggedIn: false,
+  isRefreshing: true,
 };

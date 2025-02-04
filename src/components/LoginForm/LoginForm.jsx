@@ -1,15 +1,14 @@
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as yup from "yup";
 import {
   CloseRegistrationModal,
-  Form,
   RegistrationBackdrop,
   RegistrationBtn,
   RegistrationField,
   RegistrationModal,
   RegistrationText,
   RegistrationTitle,
-} from "./RegistrationForm.styled";
+} from "../RegistationForm/RegistrationForm.styled";
 
 const validationSchema = yup.object({
   email: yup
@@ -23,14 +22,14 @@ const validationSchema = yup.object({
 });
 
 // eslint-disable-next-line react/prop-types
-const RegistrationForm = ({ onClose }) => {
+const LoginForm = ({ onClose }) => {
   const handleRegisterUser = (values) => {
     console.log(values);
   };
   return (
     <RegistrationBackdrop>
       <RegistrationModal>
-        <CloseRegistrationModal type="button" onClick={() => onClose()}>
+        <CloseRegistrationModal type="button" onClick={onClose}>
           x
         </CloseRegistrationModal>
         <RegistrationTitle>Log In</RegistrationTitle>
@@ -71,4 +70,4 @@ const RegistrationForm = ({ onClose }) => {
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;

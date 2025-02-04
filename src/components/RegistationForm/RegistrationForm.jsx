@@ -1,21 +1,29 @@
-import { Formik } from "formik";
 import * as yup from "yup";
+import { Formik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { createUserThunk } from "../../redux/auth/thunks";
+
 import {
   CloseRegistrationModal,
   Form,
   RegistrationBackdrop,
   RegistrationBtn,
   RegistrationField,
+  RegistrationFieldBox,
+  RegistrationFieldError,
   RegistrationModal,
   RegistrationText,
   RegistrationTitle,
 } from "./RegistrationForm.styled";
+
 const validationSchema = yup.object({
   name: yup
     .string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
-    .required("Required"),
+    .required("Name is required"),
   email: yup
     .string("Enter your email")
     .email("Enter a valid email")
@@ -28,13 +36,21 @@ const validationSchema = yup.object({
 
 // eslint-disable-next-line react/prop-types
 const RegistrationForm = ({ onClose }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleRegisterUser = (values) => {
     console.log(values);
+    dispatch(createUserThunk(values)).then((data) => {
+      console.log(data);
+      if (data.payload) {
+        navigate("/");
+      }
+    });
   };
   return (
     <RegistrationBackdrop>
       <RegistrationModal>
-        <CloseRegistrationModal type="button" onClick={() => onClose()}>
+        <CloseRegistrationModal type="button" onClick={onClose}>
           x
         </CloseRegistrationModal>
         <RegistrationTitle>Registration</RegistrationTitle>
@@ -54,22 +70,43 @@ const RegistrationForm = ({ onClose }) => {
         >
           {({ errors, touched }) => (
             <Form>
-              <RegistrationField name="name" type="text" placeholder="Name" />
-              {errors.name && touched.name ? <div>{errors.name}</div> : null}
-              <RegistrationField
-                name="email"
-                type="email"
-                placeholder="Email"
-              />
-              {errors.email && touched.email ? <div>{errors.email}</div> : null}
-              <RegistrationField
-                name="password"
-                type="password"
-                placeholder="Password"
-              />
-              {errors.password && touched.password ? (
-                <div>{errors.password}</div>
-              ) : null}
+              <RegistrationFieldBox>
+                <RegistrationField
+                  name="name"
+                  type="text"
+                  placeholder="Name"
+                  iserror={`${errors.name && touched.name}`}
+                />
+                {errors.name && touched.name ? (
+                  <RegistrationFieldError>{errors.name}</RegistrationFieldError>
+                ) : null}
+              </RegistrationFieldBox>
+              <RegistrationFieldBox>
+                <RegistrationField
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  iserror={`${errors.name && touched.name}`}
+                />
+                {errors.email && touched.email ? (
+                  <RegistrationFieldError>
+                    {errors.email}
+                  </RegistrationFieldError>
+                ) : null}
+              </RegistrationFieldBox>
+              <RegistrationFieldBox>
+                <RegistrationField
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  iserror={`${errors.name && touched.name}`}
+                />
+                {errors.password && touched.password ? (
+                  <RegistrationFieldError>
+                    {errors.password}
+                  </RegistrationFieldError>
+                ) : null}
+              </RegistrationFieldBox>
               <RegistrationBtn type="submit">Sign Up</RegistrationBtn>
             </Form>
           )}
@@ -80,7 +117,6 @@ const RegistrationForm = ({ onClose }) => {
 };
 
 export default RegistrationForm;
-
 // const formik = useFormik({
 //   initialValues: {
 //     name: "",

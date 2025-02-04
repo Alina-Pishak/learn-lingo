@@ -1,9 +1,11 @@
 import Filters from "../../components/Filters/Filters";
+import Header from "../../components/Header/Header";
 import TeacherList from "../../components/TeacherList/TeacherList";
 
 const TeachersPage = () => {
   return (
-    <div style={{ background: "#D9D9D9" }}>
+    <div>
+      <Header />
       <Filters />
       <TeacherList />
     </div>
