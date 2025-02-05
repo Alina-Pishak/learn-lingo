@@ -10,9 +10,11 @@ export const FiltersList = styled.ul`
 export const FilterItem = styled.li``;
 
 export const FiltersLabel = styled.label`
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   line-height: 1.29;
+  display: block;
+  margin-bottom: 8px;
   color: #8a8a89;
 `;
 

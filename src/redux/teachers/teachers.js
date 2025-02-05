@@ -11,7 +11,13 @@ export const teachersApi = createApi({
         url: "teachers.json",
       }),
     }),
+    getTeachersLanguages: builder.query({
+      query: () => ({
+        url: `teachers.json`,
+      }),
+    }),
   }),
 });
 
-export const { useGetTeachersQuery } = teachersApi;
+export const { useGetTeachersQuery, useGetTeachersLanguagesQuery } =
+  teachersApi;

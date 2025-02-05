@@ -9,8 +9,8 @@ export const selectStyles = {
     color: "#121417",
     width: "221px",
     // padding: "16px 148px 16px 18px",
-    // width: 221px;
-    // height: 48px;
+    // width: '221px',
+    height: "48px",
   }),
   indicatorSeparator: () => ({}),
   dropdownIndicator: () => ({
