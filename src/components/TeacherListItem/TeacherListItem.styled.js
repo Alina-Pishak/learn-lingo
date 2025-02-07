@@ -34,6 +34,7 @@ export const TeacherFavoriteBtn = styled.button`
   position: absolute;
   top: 24px;
   right: 24px;
+  background: none;
 `;
 
 export const TeacherStatisticsWrapper = styled.div`
@@ -85,3 +86,9 @@ export const TeacherLevelsList = styled.ul`
   gap: 8px;
 `;
 export const TeacherLevelText = styled.p``;
+export const TeacherFavoriteIcon = styled.svg`
+  width: 26px;
+  height: 26px;
+  fill: ${({ $isFavorite }) => ($isFavorite ? "red" : "white")};
+  stroke: ${({ $isFavorite }) => ($isFavorite ? "red" : "black")};
+`;

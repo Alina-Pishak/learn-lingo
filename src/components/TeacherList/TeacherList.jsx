@@ -3,10 +3,12 @@ import { Button } from "../Button/Button.styled";
 import TeacherListItem from "../TeacherListItem/TeacherListItem";
 import Filters from "../Filters/Filters";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const ITEMS_PER_PAGE = 4;
 
 const TeacherList = () => {
+  const { favorites } = useSelector((state) => state.favorites);
   const [filters, setFilters] = useState({
     language: "",
     level: "",
@@ -50,11 +52,18 @@ const TeacherList = () => {
   return (
     <div>
       <Filters setFilters={setFilters} filters={filters} />
-      {allItems.length > 0 && (
-        <ul className="teachers-container">
-          <TeacherListItem teachers={allItems.slice(0, itemsToShow)} />
-        </ul>
-      )}
+      <ul className="teachers-container">
+        {allItems.length > 0 &&
+          allItems
+            .slice(0, itemsToShow)
+            .map((teacher) => (
+              <TeacherListItem
+                key={teacher._id}
+                teacher={teacher}
+                favorites={favorites}
+              />
+            ))}
+      </ul>
       {allItems.length && allItems.length > itemsToShow && (
         <Button
           type="button"

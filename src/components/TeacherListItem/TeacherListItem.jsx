@@ -1,3 +1,18 @@
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../redux/favorites/favorites";
+import { selectUser } from "../../redux/auth/selectors";
+
+import Modal from "../Modal/Modal";
+
+import sprite from "../../images/symbol-defs.svg";
+
 import {
   ReadMoreLink,
   TeacherCard,
@@ -5,6 +20,7 @@ import {
   TeacherDescriptionItem,
   TeacherDescriptionList,
   TeacherFavoriteBtn,
+  TeacherFavoriteIcon,
   TeacherImg,
   TeacherImgWrapper,
   TeacherLevelText,
@@ -16,11 +32,21 @@ import {
   TeacherTitle,
 } from "./TeacherListItem.styled";
 
-// eslint-disable-next-line react/prop-types
-const TeacherListItem = ({ teachers }) => {
-  console.log(teachers);
-  return teachers.map((teacher) => (
-    <TeacherCard key={teacher.avatar_url}>
+const TeacherListItem = ({ teacher, favorites }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = useSelector(selectUser);
+
+  const dispatch = useDispatch();
+  const isFavorite = favorites.includes(teacher._id);
+  const addItemToFavorites = (id) => {
+    dispatch(addToFavorites(id));
+  };
+  const removeItemFromFavorites = (id) => {
+    dispatch(removeFromFavorites(id));
+  };
+  console.log(isFavorite);
+  return (
+    <TeacherCard>
       <TeacherImgWrapper>
         <TeacherImg
           src={teacher.avatar_url}
@@ -30,7 +56,20 @@ const TeacherListItem = ({ teachers }) => {
         />
       </TeacherImgWrapper>
       <TeacherCardContent>
-        <TeacherFavoriteBtn type="button">heart</TeacherFavoriteBtn>
+        <TeacherFavoriteBtn
+          type="button"
+          onClick={() =>
+            user
+              ? isFavorite
+                ? removeItemFromFavorites(teacher._id)
+                : addItemToFavorites(teacher._id)
+              : setIsModalOpen(true)
+          }
+        >
+          <TeacherFavoriteIcon $isFavorite={isFavorite}>
+            <use href={`${sprite}#icon-heart`} />
+          </TeacherFavoriteIcon>
+        </TeacherFavoriteBtn>
         <TeacherStatisticsWrapper>
           <TeacherSecondText>Languages</TeacherSecondText>
           <TeacherStatisticsList>
@@ -76,8 +115,13 @@ const TeacherListItem = ({ teachers }) => {
           ))}
         </TeacherLevelsList>
       </TeacherCardContent>
+      {isModalOpen &&
+        createPortal(
+          <Modal onClose={() => setIsModalOpen(false)} />,
+          document.body
+        )}
     </TeacherCard>
-  ));
+  );
 };
 
 export default TeacherListItem;

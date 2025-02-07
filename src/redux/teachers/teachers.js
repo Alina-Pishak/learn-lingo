@@ -11,13 +11,11 @@ export const teachersApi = createApi({
         url: "teachers.json",
       }),
     }),
-    getTeachersLanguages: builder.query({
-      query: () => ({
-        url: `teachers.json`,
-      }),
+    postFavoriteTeachers: builder.mutation({
+      query: (data) => ({ url: "favorites.json", method: "POST", data }),
     }),
   }),
 });
 
-export const { useGetTeachersQuery, useGetTeachersLanguagesQuery } =
+export const { useGetTeachersQuery, usePostFavoriteTeachersMutation } =
   teachersApi;
