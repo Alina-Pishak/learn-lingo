@@ -9,6 +9,8 @@ import {
   RegistrationText,
   RegistrationTitle,
 } from "../RegistationForm/RegistrationForm.styled";
+import { useDispatch } from "react-redux";
+import { loginUserThunk } from "../../redux/auth/thunks";
 
 const validationSchema = yup.object({
   email: yup
@@ -23,9 +25,17 @@ const validationSchema = yup.object({
 
 // eslint-disable-next-line react/prop-types
 const LoginForm = ({ onClose }) => {
-  const handleRegisterUser = (values) => {
+  const dispatch = useDispatch();
+  const handleLoginUser = (values) => {
     console.log(values);
+    dispatch(loginUserThunk(values)).then((data) => {
+      console.log(data);
+      if (data.payload) {
+        onClose();
+      }
+    });
   };
+
   return (
     <RegistrationBackdrop>
       <RegistrationModal>
@@ -43,7 +53,7 @@ const LoginForm = ({ onClose }) => {
             password: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={handleRegisterUser}
+          onSubmit={handleLoginUser}
         >
           {({ errors, touched }) => (
             <Form>

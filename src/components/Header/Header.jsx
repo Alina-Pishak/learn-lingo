@@ -12,7 +12,7 @@ import {
 } from "./Header.styled";
 
 import sprite from "../../images/symbol-defs.svg";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 import { logoutUserThunk } from "../../redux/auth/thunks";
@@ -26,13 +26,16 @@ const Header = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const location = useLocation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
 
   function handleLogOut() {
     dispatch(logoutUserThunk());
+    if (location.pathname === "/favorites") {
+      navigate("/");
+    }
   }
 
   return (
@@ -57,6 +60,16 @@ const Header = () => {
                 Teachers
               </NavItemLink>
             </NavItem>
+            {user && (
+              <NavItem>
+                <NavItemLink
+                  to="/favorites"
+                  current={`${location.pathname === "/favorites"}`}
+                >
+                  Favorites
+                </NavItemLink>
+              </NavItem>
+            )}
           </NavList>
         </NavContainer>
         <BtnContainer>

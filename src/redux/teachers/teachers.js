@@ -11,11 +11,25 @@ export const teachersApi = createApi({
         url: "teachers.json",
       }),
     }),
-    postFavoriteTeachers: builder.mutation({
-      query: (data) => ({ url: "favorites.json", method: "POST", data }),
-    }),
+    // getFavorites: builder.query({
+    //   query: () => ({
+    //     url: "teachers.json",
+    //   }),
+    // }),
+    // postFavoriteTeachers: builder.mutation({
+    //   query: (data) => ({ url: "favorites.json", method: "POST", data }),
+    // }),
+    // deleteFavoriteTeachers: builder.mutation({
+    //   query: (id) => ({
+    //     url: `favorites.json?orderBy='$value'&favorite=${id}`,
+    //     method: "DELETE",
+    //   }),
+    // }),
   }),
 });
 
-export const { useGetTeachersQuery, usePostFavoriteTeachersMutation } =
-  teachersApi;
+export const {
+  useGetTeachersQuery,
+  usePostFavoriteTeachersMutation,
+  useDeleteFavoriteTeachersMutation,
+} = teachersApi;

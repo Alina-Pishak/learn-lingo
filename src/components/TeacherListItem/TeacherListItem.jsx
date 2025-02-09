@@ -66,7 +66,7 @@ const TeacherListItem = ({ teacher, favorites }) => {
               : setIsModalOpen(true)
           }
         >
-          <TeacherFavoriteIcon $isFavorite={isFavorite}>
+          <TeacherFavoriteIcon $isFavorite={isFavorite && user}>
             <use href={`${sprite}#icon-heart`} />
           </TeacherFavoriteIcon>
         </TeacherFavoriteBtn>

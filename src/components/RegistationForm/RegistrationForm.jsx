@@ -1,6 +1,5 @@
 import * as yup from "yup";
 import { Formik } from "formik";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { createUserThunk } from "../../redux/auth/thunks";
@@ -37,13 +36,12 @@ const validationSchema = yup.object({
 // eslint-disable-next-line react/prop-types
 const RegistrationForm = ({ onClose }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const handleRegisterUser = (values) => {
     console.log(values);
     dispatch(createUserThunk(values)).then((data) => {
       console.log(data);
       if (data.payload) {
-        navigate("/");
+        onClose();
       }
     });
   };

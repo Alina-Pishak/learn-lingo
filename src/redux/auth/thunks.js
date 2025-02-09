@@ -15,14 +15,18 @@ export const createUserThunk = createAsyncThunk(
   "auth/createUser",
   async (data) => {
     const response = await createUser(data);
-    console.log(response);
     setToken.set(response.data.idToken);
     return response.data;
   }
 );
 
-export const loginUserThunk = createAsyncThunk("auth/loginUser", (data) =>
-  loginUser(data)
+export const loginUserThunk = createAsyncThunk(
+  "auth/loginUser",
+  async (data) => {
+    const response = await loginUser(data);
+    setToken.set(response.data.idToken);
+    return response.data;
+  }
 );
 
 export const getUserThunk = createAsyncThunk("auth/getUser", (data) =>

@@ -12,8 +12,9 @@ export const createUser = async (data) => {
 };
 
 export const loginUser = (data) => {
-  const dat = axios.post(`/accounts:signInWithCustomToken?key=${API_KEY}`, {
+  const dat = axios.post(`/accounts:signInWithPassword?key=${API_KEY}`, {
     ...data,
+    returnSecureToken: true,
   });
   return dat;
 };
