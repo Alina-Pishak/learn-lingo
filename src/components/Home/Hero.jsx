@@ -1,6 +1,5 @@
 import {
   DecoratedText,
-  HeroButton,
   HeroContainer,
   HeroImg,
   HeroText,
@@ -9,6 +8,7 @@ import {
 } from "./Hero.styled";
 import img1x from "../../images/girl-with-mac-1x.jpg";
 import { useNavigate } from "react-router-dom";
+import Button from "../ui/Button/Button";
 // import img2x from "../../images/girl-with-mac-2x.jpg";
 
 const Hero = () => {
@@ -26,9 +26,13 @@ const Hero = () => {
             Elevate your language proficiency to new heights by connecting with
             highly qualified and experienced tutors.
           </HeroText>
-          <HeroButton type="button" onClick={() => navigate("/teachers")}>
+          <Button
+            type="button"
+            onClick={() => navigate("/teachers")}
+            variant="hero"
+          >
             Get started
-          </HeroButton>
+          </Button>
         </HeroWrapper>
         <div>
           <HeroImg

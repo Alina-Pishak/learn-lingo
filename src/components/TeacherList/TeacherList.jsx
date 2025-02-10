@@ -1,9 +1,11 @@
-import { useGetTeachersQuery } from "../../redux/teachers/teachers";
-import { Button } from "../Button/Button.styled";
-import TeacherListItem from "../TeacherListItem/TeacherListItem";
-import Filters from "../Filters/Filters";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
+import { useGetTeachersQuery } from "../../redux/teachers/teachers";
+
+import Button from "../ui/Button/Button";
+import TeacherListItem from "../TeacherListItem/TeacherListItem";
+import Filters from "../Filters/Filters";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -65,12 +67,7 @@ const TeacherList = () => {
             ))}
       </ul>
       {allItems.length && allItems.length > itemsToShow && (
-        <Button
-          type="button"
-          onClick={loadMoreItems}
-          disabled={loading}
-          style={{ margin: "0 auto" }}
-        >
+        <Button onClick={loadMoreItems} disabled={loading} variant="teachers">
           {loading ? "Loading..." : "Load More"}
         </Button>
       )}

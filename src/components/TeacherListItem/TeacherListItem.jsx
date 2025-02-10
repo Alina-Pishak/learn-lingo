@@ -9,7 +9,7 @@ import {
 } from "../../redux/favorites/favorites";
 import { selectUser } from "../../redux/auth/selectors";
 
-import Modal from "../Modal/Modal";
+import Modal from "../ui/Modal/Modal";
 
 import sprite from "../../images/symbol-defs.svg";
 
@@ -44,7 +44,6 @@ const TeacherListItem = ({ teacher, favorites }) => {
   const removeItemFromFavorites = (id) => {
     dispatch(removeFromFavorites(id));
   };
-  console.log(isFavorite);
   return (
     <TeacherCard>
       <TeacherImgWrapper>

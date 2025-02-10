@@ -1,5 +1,5 @@
 import { useGetTeachersQuery } from "../../redux/teachers/teachers";
-import { Button } from "../Button/Button.styled";
+import Button from "../ui/Button/Button";
 import TeacherListItem from "../TeacherListItem/TeacherListItem";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -46,7 +46,6 @@ const TeacherListFavorites = () => {
       </ul>
       {allItems.length && allItems.length > itemsToShow && (
         <Button
-          type="button"
           onClick={loadMoreItems}
           disabled={loading}
           style={{ margin: "0 auto" }}

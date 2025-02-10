@@ -1,18 +1,12 @@
-import { Form, Formik } from "formik";
-import * as yup from "yup";
-import {
-  CloseRegistrationModal,
-  RegistrationBackdrop,
-  RegistrationBtn,
-  RegistrationField,
-  RegistrationModal,
-  RegistrationText,
-  RegistrationTitle,
-} from "../RegistationForm/RegistrationForm.styled";
 import { useDispatch } from "react-redux";
+import * as yup from "yup";
+
 import { loginUserThunk } from "../../redux/auth/thunks";
 
-const validationSchema = yup.object({
+import Modal from "../ui/Modal/Modal";
+import Form from "../ui/Form/Form";
+
+const validationSchemaLogin = yup.object({
   email: yup
     .string("Enter your email")
     .email("Enter a valid email")
@@ -27,9 +21,7 @@ const validationSchema = yup.object({
 const LoginForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const handleLoginUser = (values) => {
-    console.log(values);
     dispatch(loginUserThunk(values)).then((data) => {
-      console.log(data);
       if (data.payload) {
         onClose();
       }
@@ -37,46 +29,24 @@ const LoginForm = ({ onClose }) => {
   };
 
   return (
-    <RegistrationBackdrop>
-      <RegistrationModal>
-        <CloseRegistrationModal type="button" onClick={onClose}>
-          x
-        </CloseRegistrationModal>
-        <RegistrationTitle>Log In</RegistrationTitle>
-        <RegistrationText>
-          Welcome back! Please enter your credentials to access your account and
-          continue your search for an teacher.
-        </RegistrationText>
-        <Formik
-          initialValues={{
-            email: "",
-            password: "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={handleLoginUser}
-        >
-          {({ errors, touched }) => (
-            <Form>
-              <RegistrationField
-                name="email"
-                type="email"
-                placeholder="Email"
-              />
-              {errors.email && touched.email ? <div>{errors.email}</div> : null}
-              <RegistrationField
-                name="password"
-                type="password"
-                placeholder="Password"
-              />
-              {errors.password && touched.password ? (
-                <div>{errors.password}</div>
-              ) : null}
-              <RegistrationBtn type="submit">Log In</RegistrationBtn>
-            </Form>
-          )}
-        </Formik>
-      </RegistrationModal>
-    </RegistrationBackdrop>
+    <Modal
+      onClose={onClose}
+      title={"Log In"}
+      text={
+        "Welcome back! Please enter your credentials to access your account and continue your search for an teacher."
+      }
+    >
+      <Form
+        handleSubmit={handleLoginUser}
+        initialValues={{
+          email: "",
+          password: "",
+        }}
+        validationSchema={validationSchemaLogin}
+        variant="login"
+        buttonText="Log In"
+      />
+    </Modal>
   );
 };
 

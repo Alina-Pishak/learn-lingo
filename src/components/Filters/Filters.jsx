@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import Select from "react-select";
 
 import { FiltersLabel, FiltersList } from "./Filters.styled";
 import { selectStyles } from "./customSelectStyle";
-import { Button } from "../Button/Button.styled";
+import Button from "../ui/Button/Button";
 
 const languageOptions = [
   { value: "English", label: "English" },
@@ -28,9 +29,7 @@ const priceOptions = [
   { value: 40, label: "40 $" },
 ];
 
-// eslint-disable-next-line react/prop-types
 const Filters = ({ setFilters, filters }) => {
-  console.log(filters);
   function handleChangeLanguage({ value: language }) {
     setFilters((prev) => ({ ...prev, language }));
   }
@@ -91,10 +90,7 @@ const Filters = ({ setFilters, filters }) => {
           }
         ></Select>
       </li>
-      <Button
-        style={{ width: "200px", height: "50px", margin: 0, marginTop: "auto" }}
-        onClick={handleReset}
-      >
+      <Button onClick={handleReset} variant="filters">
         Reset
       </Button>
     </FiltersList>
