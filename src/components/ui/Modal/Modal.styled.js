@@ -4,6 +4,7 @@ export const ModalBackdrop = styled.div`
   position: fixed;
   display: flex;
   justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   width: 100%;
@@ -18,7 +19,6 @@ export const ModalBackdrop = styled.div`
 export const ModalModal = styled.div`
   display: flex;
   flex-direction: column;
-  top: 20%;
   left: auto;
   right: auto;
   position: absolute;

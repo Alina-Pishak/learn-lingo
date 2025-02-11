@@ -43,8 +43,11 @@ const LoginForm = ({ onClose }) => {
           password: "",
         }}
         validationSchema={validationSchemaLogin}
-        variant="login"
         buttonText="Log In"
+        fields={[
+          { name: "email", type: "email", placeholder: "Email" },
+          { name: "password", type: "password", placeholder: "Password" },
+        ]}
       />
     </Modal>
   );

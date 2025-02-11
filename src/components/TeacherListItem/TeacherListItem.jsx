@@ -10,6 +10,7 @@ import {
 import { selectUser } from "../../redux/auth/selectors";
 
 import Modal from "../ui/Modal/Modal";
+import Button from "../ui/Button/Button";
 
 import sprite from "../../images/symbol-defs.svg";
 
@@ -17,6 +18,7 @@ import {
   ReadMoreLink,
   TeacherCard,
   TeacherCardContent,
+  TeacherDescription,
   TeacherDescriptionItem,
   TeacherDescriptionList,
   TeacherFavoriteBtn,
@@ -31,9 +33,14 @@ import {
   TeacherStatisticsWrapper,
   TeacherTitle,
 } from "./TeacherListItem.styled";
+import ReviewList from "../ReviewList/ReviewList";
+import BookingForm from "../BookingForm/BookingForm";
 
 const TeacherListItem = ({ teacher, favorites }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isReadMore, setIsReadMore] = useState(false);
+
   const user = useSelector(selectUser);
 
   const dispatch = useDispatch();
@@ -105,7 +112,23 @@ const TeacherListItem = ({ teacher, favorites }) => {
             <TeacherMainText>{teacher.conditions}</TeacherMainText>
           </TeacherDescriptionItem>
         </TeacherDescriptionList>
-        <ReadMoreLink>Read more</ReadMoreLink>
+
+        <ReadMoreLink onClick={() => setIsReadMore(!isReadMore)}>
+          {isReadMore ? "Read less" : "Read more"}
+        </ReadMoreLink>
+        {isReadMore && (
+          <>
+            <TeacherDescription>{teacher.experience}</TeacherDescription>
+            <ReviewList reviews={teacher.reviews} />
+            <Button
+              variant="filters"
+              onClick={() => setIsBookingModalOpen(true)}
+            >
+              Book trial lesson
+            </Button>
+          </>
+        )}
+
         <TeacherLevelsList>
           {teacher.levels?.map((level) => (
             <li key={level}>
@@ -117,6 +140,11 @@ const TeacherListItem = ({ teacher, favorites }) => {
       {isModalOpen &&
         createPortal(
           <Modal onClose={() => setIsModalOpen(false)} />,
+          document.body
+        )}
+      {isBookingModalOpen &&
+        createPortal(
+          <BookingForm onClose={() => setIsBookingModalOpen(false)} />,
           document.body
         )}
     </TeacherCard>

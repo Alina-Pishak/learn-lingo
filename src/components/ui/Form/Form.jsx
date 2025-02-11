@@ -8,8 +8,9 @@ const Form = ({
   initialValues,
   validationSchema,
   handleSubmit,
-  variant = "register",
-  buttonText = "Sign Up",
+  buttonText,
+  specificTypeFields,
+  fields,
 }) => {
   return (
     <Formik
@@ -19,42 +20,21 @@ const Form = ({
     >
       {({ errors, touched }) => (
         <FormFormik>
-          {variant === "register" && (
-            <FormFieldBox>
+          {specificTypeFields && specificTypeFields}
+          {fields.map((field, index) => (
+            <FormFieldBox key={index}>
               <FormField
-                name="name"
-                type="text"
-                placeholder="Name"
+                name={field.name}
+                type={field.type}
+                placeholder={field.placeholder}
                 iserror={`${errors.name && touched.name}`}
               />
-              {errors.name && touched.name ? (
-                <FormFieldError>{errors.name}</FormFieldError>
+              {errors[field.name] && touched[field.name] ? (
+                <FormFieldError>{errors[field.name]}</FormFieldError>
               ) : null}
             </FormFieldBox>
-          )}
+          ))}
 
-          <FormFieldBox>
-            <FormField
-              name="email"
-              type="email"
-              placeholder="Email"
-              iserror={`${errors.name && touched.name}`}
-            />
-            {errors.email && touched.email ? (
-              <FormFieldError>{errors.email}</FormFieldError>
-            ) : null}
-          </FormFieldBox>
-          <FormFieldBox>
-            <FormField
-              name="password"
-              type="password"
-              placeholder="Password"
-              iserror={`${errors.name && touched.name}`}
-            />
-            {errors.password && touched.password ? (
-              <FormFieldError>{errors.password}</FormFieldError>
-            ) : null}
-          </FormFieldBox>
           <Button type="submit">{buttonText}</Button>
         </FormFormik>
       )}

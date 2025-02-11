@@ -6,7 +6,7 @@ export const TeacherCard = styled.li`
   border-radius: 24px;
   padding: 24px;
   width: 1184px;
-  height: 328px;
+  /* height: 328px; */
   background-color: #fff;
   position: relative;
   margin-bottom: 32px;
@@ -63,13 +63,21 @@ export const TeacherDescriptionList = styled.ul`
 export const TeacherDescriptionItem = styled.li`
   margin-bottom: 8px;
 `;
-// export const TeacherDescriptionList
 
 export const TeacherMainText = styled.span`
   font-weight: 600;
   font-size: 16px;
   line-height: 1.5;
   color: #121417;
+`;
+
+export const TeacherDescription = styled.p`
+  font-size: 16px;
+  color: #121417;
+  /* display: inline-block; */
+  width: 900px;
+  margin-bottom: 32px;
+  margin-top: 16px;
 `;
 
 export const TeacherSecondText = styled(TeacherMainText)`

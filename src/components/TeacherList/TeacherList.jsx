@@ -10,7 +10,6 @@ import Filters from "../Filters/Filters";
 const ITEMS_PER_PAGE = 4;
 
 const TeacherList = () => {
-  const { favorites } = useSelector((state) => state.favorites);
   const [filters, setFilters] = useState({
     language: "",
     level: "",
@@ -19,6 +18,8 @@ const TeacherList = () => {
   const [allItems, setAllItems] = useState([]);
   const [itemsToShow, setItemsToShow] = useState(ITEMS_PER_PAGE);
   const [loading, setLoading] = useState(true);
+
+  const { favorites } = useSelector((state) => state.favorites);
 
   const { data } = useGetTeachersQuery();
   useEffect(() => {

@@ -49,6 +49,12 @@ const RegistrationForm = ({ onClose }) => {
           password: "",
         }}
         validationSchema={validationSchemaRegister}
+        buttonText="Sign Up"
+        fields={[
+          { name: "name", type: "text", placeholder: "Name" },
+          { name: "email", type: "email", placeholder: "Email" },
+          { name: "password", type: "password", placeholder: "Password" },
+        ]}
       />
     </Modal>
   );

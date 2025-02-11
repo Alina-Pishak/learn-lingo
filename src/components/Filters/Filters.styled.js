@@ -17,5 +17,3 @@ export const FiltersLabel = styled.label`
   margin-bottom: 8px;
   color: #8a8a89;
 `;
-
-// export const

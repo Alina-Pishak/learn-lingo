@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useEffect } from "react";
 import {
   CloseModalModal,
   ModalBackdrop,
@@ -8,9 +9,24 @@ import {
 } from "./Modal.styled";
 
 const Modal = ({ onClose, children, title, text }) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "auto";
+
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+  const handleKeyDown = (e) => {
+    if (e.key === "Escape") {
+      onClose();
+    }
+  };
   return (
-    <ModalBackdrop>
-      <ModalModal>
+    <ModalBackdrop onClick={onClose}>
+      <ModalModal onClick={(e) => e.stopPropagation()}>
         <CloseModalModal type="button" onClick={onClose}>
           x
         </CloseModalModal>
