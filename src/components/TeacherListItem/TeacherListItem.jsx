@@ -9,10 +9,15 @@ import {
 } from "../../redux/favorites/favorites";
 import { selectUser } from "../../redux/auth/selectors";
 
-import Modal from "../ui/Modal/Modal";
 import Button from "../ui/Button/Button";
 
 import sprite from "../../images/symbol-defs.svg";
+
+import ReviewList from "../ReviewList/ReviewList";
+import BookingForm from "../BookingForm/BookingForm";
+import SuccessModal from "../SuccessModal/SuccessModal";
+import AddToFavoriteMessage from "../AddToFavoriteMessage/AddToFavoriteMessage";
+import LoginForm from "../LoginForm/LoginForm";
 
 import {
   ReadMoreLink,
@@ -25,21 +30,24 @@ import {
   TeacherFavoriteIcon,
   TeacherImg,
   TeacherImgWrapper,
-  TeacherLevelText,
+  TeacherLevelsItemText,
+  TeacherLevelsItemItem,
   TeacherLevelsList,
   TeacherMainText,
+  TeacherMainTextPrice,
   TeacherSecondText,
   TeacherStatisticsList,
+  TeacherStatisticsListItem,
   TeacherStatisticsWrapper,
   TeacherTitle,
 } from "./TeacherListItem.styled";
-import ReviewList from "../ReviewList/ReviewList";
-import BookingForm from "../BookingForm/BookingForm";
 
 const TeacherListItem = ({ teacher, favorites }) => {
+  const [isOpenSuccessMessage, setIsOpenSuccessMessage] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isReadMore, setIsReadMore] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const user = useSelector(selectUser);
 
@@ -79,25 +87,36 @@ const TeacherListItem = ({ teacher, favorites }) => {
         <TeacherStatisticsWrapper>
           <TeacherSecondText>Languages</TeacherSecondText>
           <TeacherStatisticsList>
-            <li>
+            <TeacherStatisticsListItem>
+              <svg width={16} height={16}>
+                <use href={`${sprite}#icon-open-book`} />
+              </svg>
               <TeacherMainText>Lessons online</TeacherMainText>
-            </li>
-            <li>
+            </TeacherStatisticsListItem>
+            <TeacherStatisticsListItem>
               <TeacherMainText>
                 Lessons done: {teacher.lessons_done}
               </TeacherMainText>
-            </li>
-            <li>
+            </TeacherStatisticsListItem>
+            <TeacherStatisticsListItem>
+              <svg width={16} height={16}>
+                <use href={`${sprite}#icon-star`} />
+              </svg>
               <TeacherMainText>Rating: {teacher.rating}</TeacherMainText>
-            </li>
-            <li>
+            </TeacherStatisticsListItem>
+            <TeacherStatisticsListItem>
               <TeacherMainText>
-                Price / 1 hour: {teacher.price_per_hour}
+                Price / 1 hour:{" "}
+                <TeacherMainTextPrice>
+                  {teacher.price_per_hour}$
+                </TeacherMainTextPrice>
               </TeacherMainText>
-            </li>
+            </TeacherStatisticsListItem>
           </TeacherStatisticsList>
         </TeacherStatisticsWrapper>
-        <TeacherTitle>{teacher.name}</TeacherTitle>
+        <TeacherTitle>
+          {teacher.name} {teacher.surname}
+        </TeacherTitle>
         <TeacherDescriptionList>
           <TeacherDescriptionItem>
             <TeacherSecondText>Speaks:&nbsp;</TeacherSecondText>
@@ -131,20 +150,37 @@ const TeacherListItem = ({ teacher, favorites }) => {
 
         <TeacherLevelsList>
           {teacher.levels?.map((level) => (
-            <li key={level}>
-              <TeacherLevelText>#{level}</TeacherLevelText>
-            </li>
+            <TeacherLevelsItemItem key={level}>
+              <TeacherLevelsItemText>#{level}</TeacherLevelsItemText>
+            </TeacherLevelsItemItem>
           ))}
         </TeacherLevelsList>
       </TeacherCardContent>
       {isModalOpen &&
         createPortal(
-          <Modal onClose={() => setIsModalOpen(false)} />,
+          <AddToFavoriteMessage
+            onClose={() => setIsModalOpen(false)}
+            setIsLoginOpen={setIsLoginOpen}
+          />,
           document.body
         )}
       {isBookingModalOpen &&
         createPortal(
-          <BookingForm onClose={() => setIsBookingModalOpen(false)} />,
+          <BookingForm
+            onClose={() => setIsBookingModalOpen(false)}
+            setIsOpenSuccessMessage={setIsOpenSuccessMessage}
+            teacher={teacher}
+          />,
+          document.body
+        )}
+      {isOpenSuccessMessage &&
+        createPortal(
+          <SuccessModal onClose={() => setIsOpenSuccessMessage(false)} />,
+          document.body
+        )}
+      {isLoginOpen &&
+        createPortal(
+          <LoginForm onClose={() => setIsLoginOpen(false)} />,
           document.body
         )}
     </TeacherCard>

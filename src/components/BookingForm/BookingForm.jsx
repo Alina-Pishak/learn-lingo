@@ -1,9 +1,14 @@
+/* eslint-disable react/prop-types */
 import * as yup from "yup";
 
 import Modal from "../ui/Modal/Modal";
 import Form from "../ui/Form/Form";
 
 import {
+  BookingFormTeacher,
+  BookingFormTeacherImg,
+  BookingFormTeacherName,
+  BookingFormTeacherText,
   CustomRadio,
   HiddenRadio,
   RadioGroupWrapper,
@@ -27,11 +32,10 @@ const validationSchemaBooking = yup.object({
     .required("Password is required"),
 });
 
-// eslint-disable-next-line react/prop-types
-const BookingForm = ({ onClose }) => {
-  const handleBooking = (values) => {
-    console.log(values);
-  
+const BookingForm = ({ onClose, setIsOpenSuccessMessage, teacher }) => {
+  const handleBooking = () => {
+    onClose();
+    setIsOpenSuccessMessage(true);
   };
 
   return (
@@ -42,6 +46,20 @@ const BookingForm = ({ onClose }) => {
         "Our experienced tutor will assess your current language level, discuss your learning goals, and tailor the lesson to your specific needs."
       }
     >
+      <BookingFormTeacher>
+        <BookingFormTeacherImg
+          src={teacher.avatar_url}
+          alt={teacher.name}
+          width={44}
+          height={44}
+        />
+        <div>
+          <BookingFormTeacherText>Your teacher</BookingFormTeacherText>
+          <BookingFormTeacherName>
+            {teacher.name} {teacher.surname}
+          </BookingFormTeacherName>
+        </div>
+      </BookingFormTeacher>
       <Form
         handleSubmit={handleBooking}
         initialValues={{

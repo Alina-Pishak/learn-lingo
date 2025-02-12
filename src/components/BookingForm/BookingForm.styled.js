@@ -1,6 +1,30 @@
 import { Field } from "formik";
 import styled from "styled-components";
 
+export const BookingFormTeacher = styled.div`
+  display: flex;
+  gap: 14px;
+  margin-bottom: 40px;
+`;
+export const BookingFormTeacherImg = styled.img`
+  width: 44;
+  height: 44;
+  border-radius: 50%;
+`;
+export const BookingFormTeacherText = styled.span`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.3;
+  color: #8a8a89;
+`;
+export const BookingFormTeacherName = styled.p`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #121417;
+  margin-top: 4px;
+`;
+
 export const RadioLabel = styled.label`
   display: flex;
   align-items: center;

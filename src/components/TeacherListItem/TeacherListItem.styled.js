@@ -39,12 +39,30 @@ export const TeacherFavoriteBtn = styled.button`
 
 export const TeacherStatisticsWrapper = styled.div`
   display: flex;
-  gap: 192px;
+  justify-content: space-between;
 `;
 
 export const TeacherStatisticsList = styled.ul`
   display: flex;
-  gap: 32px;
+`;
+
+export const TeacherStatisticsListItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  &::after {
+    content: "";
+    /* flex: 1; */
+    width: 1px;
+    height: 16px;
+    background: #12141733;
+    margin: 0 16px;
+  }
+  &:last-child {
+    &::after {
+      display: none;
+    }
+  }
 `;
 
 export const TeacherTitle = styled.h3`
@@ -74,7 +92,6 @@ export const TeacherMainText = styled.span`
 export const TeacherDescription = styled.p`
   font-size: 16px;
   color: #121417;
-  /* display: inline-block; */
   width: 900px;
   margin-bottom: 32px;
   margin-top: 16px;
@@ -82,6 +99,10 @@ export const TeacherDescription = styled.p`
 
 export const TeacherSecondText = styled(TeacherMainText)`
   color: #8a8a89;
+`;
+
+export const TeacherMainTextPrice = styled(TeacherMainText)`
+  color: #38cd3e;
 `;
 
 export const ReadMoreLink = styled(TeacherMainText)`
@@ -93,10 +114,26 @@ export const TeacherLevelsList = styled.ul`
   display: flex;
   gap: 8px;
 `;
-export const TeacherLevelText = styled.p``;
+
+export const TeacherLevelsItemText = styled.p``;
+export const TeacherLevelsItemItem = styled.li`
+  border-radius: 35px;
+  padding: 8px 12px;
+  border: 1px solid #12141733;
+  &:first-child {
+    background: #cbded3;
+    border-color: #cbded3;
+  }
+`;
+
 export const TeacherFavoriteIcon = styled.svg`
   width: 26px;
   height: 26px;
   fill: ${({ $isFavorite }) => ($isFavorite ? "red" : "white")};
   stroke: ${({ $isFavorite }) => ($isFavorite ? "red" : "black")};
+`;
+
+export const TeacherRatingIcon = styled.svg`
+  width: 26px;
+  height: 26px;
 `;
